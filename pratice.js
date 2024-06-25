@@ -22,4 +22,6 @@ let arry = arr.filter((item)=>{
 
 
 const mat =(a)=>a*10
-console.log(mat(2))
+console.log(mat(2));
+console.log(mat(3));
+
