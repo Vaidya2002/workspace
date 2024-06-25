@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+ <html lang="en">
+ 
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>Convert | Export html Table to CSV & EXCEL File</title>
+     <link rel="stylesheet" type="text/css" href="style3.css">
+ </head>
+ 
+ <body>
+     <main class="table" id="customers_table">
+         <section class="table__header">
+             <h1 style="margin-left: 30px; margin-top: 10px;">Project</h1>
+             <div class="input-group">
+                 <input type="search" placeholder="Search Data...">
+                 <img src="images/search.png" alt="">
+             </div>
+             <div class="export__file">
+                 <label for="export-file" class="export__file-btn" title="Export File"></label>
+                 <input type="checkbox" id="export-file">
+                 <div class="export__file-options">
+                     <label>Export As &nbsp; &#10140;</label>
+                     <label for="export-file" id="toPDF">PDF <img src="images/pdf.png" alt=""></label>
+                     <label for="export-file" id="toJSON">JSON <img src="images/json.png" alt=""></label>
+                     <label for="export-file" id="toCSV">CSV <img src="images/csv.png" alt=""></label>
+                     <label for="export-file" id="toEXCEL">EXCEL <img src="images/excel.png" alt=""></label>
+                 </div>
+             </div>
+         </section>
+         <section class="table__body">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id <span class="icon-arrow">&UpArrow;</span></th>
+                        <th>Title <span class="icon-arrow">&UpArrow;</span></th>
+                        <th>Description <span class="icon-arrow">&UpArrow;</span></th>
+                        <th>Tags <span class="icon-arrow">&UpArrow;</span></th>
+                        <th>Level <span class="icon-arrow">&UpArrow;</span></th>
+                        <th>Preview Link <span class="icon-arrow">&UpArrow;</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Todo List App</td>
+                        <td>A simple todo list application built with JavaScript, HTML, and CSS. Users can add, edit, and delete tasks. This application is designed to be user-friendly and accessible on various devices.</td>
+                        <td>JavaScript, HTML, CSS, Web Development</td>
+                        <td>beginner</td>
+                        <td><a href="todo-list-app">Link</a></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Weather App</td>
+                        <td>A weather application that fetches real-time weather data from an API and displays it to the user. This application includes features like current weather conditions, forecast, and weather alerts.</td>
+                        <td>React, API, Tailwind CSS, Web Development</td>
+                        <td>medium</td>
+                        <td><a href="weather-app">Link</a></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>E-commerce Website</td>
+                        <td>A full-fledged e-commerce website with features like product listing, shopping cart, checkout process, and admin panel. This application includes features like user authentication, order tracking, and payment processing.</td>
+                        <td>Node.js, Express, MongoDB, React, E-commerce</td>
+                        <td>advanced</td>
+                        <td><a href="ecommerce-website">Link</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+     </main>
+     <script src="script3.js"></script>
+ 
+ </body>
+ 
+ </html>

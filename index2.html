@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Job Application</title>
+    <style>
+        @page {
+            size: A4 landscape;
+            margin: 10mm;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+        .a4-page {
+            width: calc(297mm - 20mm); /* 297mm - 2 * 10mm margins */
+            height: auto; /* auto height to fit content */
+            max-height: calc(210mm - 20mm); /* 210mm - 2 * 10mm margins */
+            border: 1px solid #000;
+            padding: 10mm;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff0000;
+        }
+        .header .left {
+            display: flex;
+            align-items: center;
+        }
+        .header .left .text {
+            line-height: 1.2;
+        }
+        .header .left .text .title {
+            font-size: 16px;
+            color: #000000;
+        }
+        .header .right {
+            flex-grow: 1;
+            text-align: right;
+            margin-left: 10px;
+        }
+        .header .right p {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        .header .right p img {
+            width: 20px;
+            height: 20px;
+            margin-left: 10px;
+        }
+        .content {
+            font-size: 14px;
+            line-height: 1.4;
+            margin-top: 10px;
+        }
+        .content p {
+            margin: 10px 0;
+        }
+        .content .signature {
+            margin-top: 20px;
+        }
+        #icon {
+            width: 80px;
+            height: 80px;
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="a4-page">
+        <div class="header">
+            <div class="left">
+                <div id="icon">
+                    <img src="logo png-min.png" alt="Company Logo" style="width: 100%; height: 100%;">
+                </div>
+                <div class="text">
+                    <div class="name">Bootcoding Pvt. Ltd.</div>
+                    <div class="title">Sourcing Proficient Developers</div>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <p><b>Dear Sir/Ma'am,</b><br>I hope this email finds you well.
+                I am excited to introduce Nachiket Saraf, a highly skilled Software developer from Bootcoding.</p>
+            <p>I have 4 years of experience in marketing in the previous company. I am confident that through my experience
+                and skills, I can make a valuable contribution to the team and help achieve company goals, especially in
+                marketing strategy.</p>
+            <p>Bootcoding brings the Next Generation Workforce to the IT Industry. We provide solutions to the Hiring
+                team with our Talent having Practical Proficiency and Nachiket is a testament to our commitment.</p>
+            <p>Key qualifications include:
+            <ul>
+                <li>Proficiency in Java with solid OOP knowledge</li>
+                <li>Experience in developing, testing, and deploying Java applications</li>
+                <li>Strong problem-solving and teamwork skills</li>
+            </ul>
+            </p>
+            <p>Attached is Nachiket's resume for your consideration. Please let me know if you need any additional information or would like to arrange an interview.<br>Thank you for your time and consideration.</p>
+            <p>
+            Warm regards,<br>
+            <br>
+            <strong>Kanika Kedia</strong><br>
+            <span style="color: grey;">Business Development Intern<br>
+            Organization - Bootcoding Pvt. Ltd.<br>
+            Website - <a href="https://www.bootcoding.in/" style="color: grey;">Bootcoding</a><br>
+            Email Id - talent.bootcoding@gmail.com<br>
+            Contact - +91 8208053484 | +91 07123574418</span>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

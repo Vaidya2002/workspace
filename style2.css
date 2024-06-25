@@ -1,0 +1,88 @@
+/* CSS reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.letterhead {
+    width: 210mm; /* A4 width */
+    height: 297mm; /* A4 height */
+    margin: 0 auto;
+    padding: 20mm;
+    background-color: white;
+    border: 1px solid #ddd;
+    position: relative;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-shape {
+    width: 50px;
+    height: 50px;
+    background-color: #FFC107;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    margin-right: 10px;
+}
+
+.logo-text {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.contact-info {
+    text-align: right;
+}
+
+.contact-info p {
+    margin: 5px 0;
+}
+
+.contact-info a {
+    color: white;
+    text-decoration: none;
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
+}
+
+.date-address {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.date {
+    font-weight: bold;
+}
+
+.address {
+    text-align: right;
+}
+
+.content {
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.signature {
+    margin-top: 20px;
+}
