@@ -21,7 +21,16 @@ let arry = arr.filter((item)=>{
 
 
 
-const mat =(a)=>a*10
-console.log(mat(2));
-console.log(mat(3));
+// const mat =(a)=>a*10
+// console.log(mat(2));
+// console.log(mat(3));
+
+const pttp = require('http')
+const data = require('./data')
+
+pttp.createServer((req,resp)=>{
+    resp.writeHead(200,{'Content-Type':'application\JSON '});
+    resp.write(JSON.stringify(data));
+    resp.end();
+}).listen(5000);
 
