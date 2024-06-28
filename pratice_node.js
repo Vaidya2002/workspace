@@ -1,3 +1,4 @@
+const { rejects } = require('assert')
 const pratice2 = require('./pratice2')
 // console.log(pratice2.z())
 
@@ -99,3 +100,41 @@ const filepath = `${dirpath}/apple.txt`
 // fs.unlinkSync(`${dirpath}/pawan.txt`)
 
 // -----------------------------------------
+
+// console.log("start exe1.......")
+
+// setTimeout (()=>{
+//     console.log("start exe2.......")
+// },2000)
+
+// console.log("start exe3.......")
+
+
+let a = 20
+let b = 0
+
+let waitingData = new Promise((resolve,rejects)=>{
+    setTimeout(()=>{
+          resolve(b = 20)
+    },2000)
+})
+
+waitingData.then((data)=>{
+    
+    // console.log(a + data)
+})
+
+
+// -----------------------------------------
+const express = require('express');
+const app = express();
+
+app.get('',(req,res)=>{
+    res.send('hello, this is home page')
+});
+
+app.get('/index',(req,res)=>{
+    res.send('hello, this is index page')
+});
+
+app.listen(4300);
