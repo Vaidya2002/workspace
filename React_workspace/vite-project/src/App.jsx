@@ -36,15 +36,41 @@
 
 
 // import React from 'react';
-// import PDFViewer from './PDFViewer';
+// // import PDFViewer from './PDFViewer';
+// import Card from './Card';
+
+// let myobj={
+//   username:'pawan',
+//   age:'22',
+//   location:'Nagpur'
+// }
 
 // function App() {
 //   return (
 //     <div className="App">
-//       <PDFViewer />
+//      <Card name="Pawan" des="my name is Pawan"  />
+//      <Card name="Tanmay" des="my name is Tanmay"/>
 //     </div>
 //   );
 // }
 
 // export default App;
 
+
+// =====================================
+
+import React from "react";
+import Header from "./components/Header/Header";
+
+
+function App(){
+  const[count, setCounter] = useState(0)
+
+  return(
+    <>
+    
+    </>
+  )
+}
+
+export default App

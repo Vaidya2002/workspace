@@ -1,96 +1,94 @@
-import React, { useState } from 'react';
-import { getDocument } from 'pdfjs-dist/build/pdf'; // Import specific function from PDF.js
-
-import './styles.css'; // Import CSS styles for the component
+import React, { useState, useEffect, useRef } from 'react';
+import { Button, Modal } from 'react-bootstrap';
+import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist/build/pdf';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const PDFViewer = () => {
-  const [modalOpen, setModalOpen] = useState(false); // State hook for modal visibility
-  const [pages, setPages] = useState([]); // State hook for storing rendered PDF pages
+    const [show, setShow] = useState(false);
+    const pdfContainerRef = useRef(null);
 
-  // Function to open the modal and load PDF
-  const openModal = () => {
-    setModalOpen(true);
-    loadPDF();
-  };
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
-  // Function to close the modal and clear pages
-  const closeModal = () => {
-    setModalOpen(false);
-    setPages([]);
-  };
+    const loadPDF = () => {
+        const url = 'src/Day 1.pdf'; // Replace with your PDF file URL
 
-  // Function to load the PDF using PDF.js
-  const loadPDF = () => {
-    const url = '/Day 1.pdf'; // Adjust the PDF URL as needed
+        const loadingTask = getDocument(url);
+        loadingTask.promise.then((pdf) => {
+            const pdfContainer = pdfContainerRef.current;
+            pdfContainer.innerHTML = ''; // Clear previous content
 
-    // Configure the worker source URL
-    window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js';
+            // Determine scale factor based on screen width
+            const scale = window.innerWidth <= 768 ? 0.9 : 1.0;
 
+            // Render each page with the determined scale
+            for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+                renderPage(pdf, pageNum, pdfContainer, scale);
+            }
+        }).catch((error) => {
+            console.error('Error loading PDF:', error);
+        });
+    };
 
-    // Load the PDF document
-    const loadingTask = getDocument(url);
-    loadingTask.promise.then((pdf) => {
-      const newPages = [];
-      for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
-        renderPage(pdf, pageNum, newPages);
-      }
-      setPages(newPages);
-    }).catch((error) => {
-      console.error('Error loading PDF:', error);
-    });
-  };
+    const renderPage = (pdf, pageNum, container, scale = 1.0) => {
+        pdf.getPage(pageNum).then((page) => {
+            const viewport = page.getViewport({ scale });
 
-  // Function to render a page of the PDF
-  const renderPage = (pdf, pageNum, pagesArray) => {
-    pdf.getPage(pageNum).then((page) => {
-      const scale = 1.0; // Adjust scale factor to make PDF smaller
-      const viewport = page.getViewport({ scale });
+            const canvas = document.createElement('canvas');
+            canvas.className = 'pdf-page';
+            const context = canvas.getContext('2d');
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
 
-      const canvas = document.createElement('canvas');
-      canvas.className = 'pdf-page';
-      const context = canvas.getContext('2d');
-      canvas.height = viewport.height;
-      canvas.width = viewport.width;
+            const renderContext = {
+                canvasContext: context,
+                viewport,
+            };
 
-      const renderContext = {
-        canvasContext: context,
-        viewport: viewport
-      };
+            const renderTask = page.render(renderContext);
+            renderTask.promise.then(() => {
+                container.appendChild(canvas);
+                console.log('Page rendered');
+            });
+        });
+    };
 
-      const renderTask = page.render(renderContext);
-      renderTask.promise.then(() => {
-        pagesArray.push(canvas); // Store canvas element in state
-        setPages([...pagesArray]); // Update state with new pages
-      }).catch((error) => {
-        console.error('Error rendering page:', error);
-      });
-    }).catch((error) => {
-      console.error('Error fetching page:', error);
-    });
-  };
+    useEffect(() => {
+        if (show) {
+            import('pdfjs-dist').then(pdfjs => {
+                GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+                loadPDF();
+            }).catch(error => {
+                console.error('Error initializing pdfjs-dist:', error);
+            });
+        }
 
-  return (
-    <div>
-      {/* Button to open the modal */}
-      <button className="view-btn" onClick={openModal}>View PDF</button>
+        const handleResize = () => {
+            if (show) {
+                loadPDF(); // Reload PDF with updated scale on resize
+            }
+        };
 
-      {/* The Modal */}
-      {modalOpen &&
-        <div id="myModal" className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={closeModal}>&times;</span>
-            <div id="pdf-container" className="pdf-container">
-              {pages.map((canvas, index) => (
-                <div key={index} className="pdf-page-container">
-                  {canvas}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      }
-    </div>
-  );
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, [show]);
+
+    return (
+        <>
+            <Button variant="primary" onClick={handleShow}>
+                View PDF
+            </Button>
+
+            <Modal show={show} onHide={handleClose} size="lg">
+                <Modal.Header closeButton>
+                    <Modal.Title>PDF Viewer</Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{ maxHeight: '750px', overflowY: 'auto' }}>
+                    <div id="pdf-container" ref={pdfContainerRef} style={{ width: '100%', height: '600px', overflow: 'auto' }}></div>
+                </Modal.Body>
+            </Modal>
+        </>
+    );
 };
 
 export default PDFViewer;
