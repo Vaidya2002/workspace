@@ -64,12 +64,12 @@ import Header from "./components/Header/Header";
 
 
 function App(){
-  const[count, setCounter] = useState(0)
+  
 
   return(
-    <>
-    
-    </>
+    <UserContextProvider>
+    <h1>sdfdh</h1>
+    </UserContextProvider>
   )
 }
 
