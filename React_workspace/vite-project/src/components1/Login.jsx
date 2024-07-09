@@ -23,3 +23,5 @@ function login() {
         </div>
     )
 }
+
+export default login

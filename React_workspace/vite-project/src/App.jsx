@@ -61,6 +61,8 @@
 
 import React from "react";
 import Header from "./components/Header/Header";
+import Profile from "./components1/Profile";
+import Login from "./components1/Login";
 
 
 function App(){
@@ -68,7 +70,9 @@ function App(){
 
   return(
     <UserContextProvider>
-    <h1>sdfdh</h1>
+    <h1>React with pawan</h1>
+    <Login/>
+    <Profile/>
     </UserContextProvider>
   )
 }
