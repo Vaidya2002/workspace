@@ -1,17 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Button, Modal } from 'react-bootstrap';
+import React, { useEffect, useRef } from 'react';
 import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist/build/pdf';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'tailwindcss/tailwind.css';
 
 const PDFViewer = () => {
-    const [show, setShow] = useState(false);
     const pdfContainerRef = useRef(null);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
     const loadPDF = () => {
-        const url = 'src/Day 1.pdf'; // Replace with your PDF file URL
+        const url = '/Day 1.pdf'; // Path to the PDF in the public folder
 
         const loadingTask = getDocument(url);
         loadingTask.promise.then((pdf) => {
@@ -49,45 +44,40 @@ const PDFViewer = () => {
             renderTask.promise.then(() => {
                 container.appendChild(canvas);
                 console.log('Page rendered');
+            }).catch((error) => {
+                console.error(`Error rendering page ${pageNum}:`, error);
             });
+        }).catch((error) => {
+            console.error(`Error getting page ${pageNum}:`, error);
         });
     };
 
     useEffect(() => {
-        if (show) {
-            import('pdfjs-dist').then(pdfjs => {
-                GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
-                loadPDF();
-            }).catch(error => {
-                console.error('Error initializing pdfjs-dist:', error);
-            });
-        }
+        import('pdfjs-dist').then(pdfjs => {
+            GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+            loadPDF();
+        }).catch(error => {
+            console.error('Error initializing pdfjs-dist:', error);
+        });
 
         const handleResize = () => {
-            if (show) {
-                loadPDF(); // Reload PDF with updated scale on resize
-            }
+            loadPDF(); // Reload PDF with updated scale on resize
         };
 
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
-    }, [show]);
+    }, []);
 
     return (
-        <>
-            <Button variant="primary" onClick={handleShow}>
-                View PDF
-            </Button>
-
-            <Modal show={show} onHide={handleClose} size="lg">
-                <Modal.Header closeButton>
-                    <Modal.Title>PDF Viewer</Modal.Title>
-                </Modal.Header>
-                <Modal.Body style={{ maxHeight: '750px', overflowY: 'auto' }}>
-                    <div id="pdf-container" ref={pdfContainerRef} style={{ width: '100%', height: '600px', overflow: 'auto' }}></div>
-                </Modal.Body>
-            </Modal>
-        </>
+        <div className="container mx-auto p-4">
+            <h2 className="text-xl font-semibold mb-4">PDF Viewer</h2>
+            <div
+                id="pdf-container"
+                ref={pdfContainerRef}
+                className="w-full h-full overflow-auto"
+                style={{ width: '100%', height: '600px' }}
+            ></div>
+        </div>
     );
 };
 

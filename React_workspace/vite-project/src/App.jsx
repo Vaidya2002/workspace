@@ -36,7 +36,7 @@
 
 
 // import React from 'react';
-// // import PDFViewer from './PDFViewer';
+// import PDFViewer from './PDFViewer';
 // import Card from './Card';
 
 // let myobj={
@@ -59,22 +59,34 @@
 
 // =====================================
 
-import React from "react";
-import Header from "./components/Header/Header";
-import Profile from "./components1/Profile";
-import Login from "./components1/Login";
+// import React from "react";
+// import Header from "./components/Header/Header";
+// import Profile from "./components1/Profile";
+// import Login from "./components1/Login";
 
 
-function App(){
+// function App(){
   
 
-  return(
-    <UserContextProvider>
-    <h1>React with pawan</h1>
-    <Login/>
-    <Profile/>
-    </UserContextProvider>
-  )
+//   return(
+//     <UserContextProvider>
+//     <h1>React with pawan</h1>
+//     <Login/>
+//     <Profile/>
+//     </UserContextProvider>
+//   )
+// }
+
+// export default App
+
+import React from 'react';
+import PDFViewer from './PDFViewer';
+
+
+function App() {
+  return (
+    <PDFViewer/>
+  );
 }
 
-export default App
+export default App;
